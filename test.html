@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>链式方法 </title>
+</head>
+<body>
+	<script>
+		function base(){
+			this.str = ' base.str '
+		}
+		base.prototype = {
+			chain : function(){
+				var obj = Object.assign({},this.__proto__)
+				obj.toString = function(){
+					return 'aaaa'
+				}
+				return obj
+			}
+		}
+
+		var b = new base()
+
+		console.log( b.chain())
+		alert( b.chain())
+
+		var chain = function(){
+				var obj = Object.assign({},{a:111})
+				obj.toString = function(){
+					return this.a
+				}
+				return obj
+			}
+
+			console.log( chain())
+
+
+function test() {
+    function fn() {
+		console.log('我是fn')
+	}
+    fn.toString = () => {
+        console.log('toString()')
+        return 'toString'
+    }
+    return fn
+}
+console.log(test())
+
+
+
+var userinfo = {
+        "name": "mike",
+        "age": 23,
+        "phone": "020-87654321",
+        "toString": function() {
+            var objstr = '';
+            for (var key in this) {
+                if (typeof(this[key]) == 'string')
+                    objstr += '"' + key + '":"' + this[key] + '",';
+            }
+            return 1111//'{' + objstr.replace(/,$/, '') + '}';
+        }
+    }
+    console.log(userinfo);
+    alert(userinfo);
+	</script>
+</body>
+</html>
